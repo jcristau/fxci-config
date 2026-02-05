@@ -2120,12 +2120,17 @@
     - queue:route:index.{trust_domain}.v2.{alias}.*
     - queue:route:index.{trust_domain}.v2.staging-adhoc-manifest.*
     - queue:route:index.adhoc-signing.cache.level-{level}.*
-    - queue:get-artifact:releng/adhoc/*
     - queue:route:notify.email.*
   to:
     - project:
         feature: adhoc-roles
-        job: [branch:*, action:*, pull-request:trusted, action:*, cron:*]
+
+- grant:
+    - queue:get-artifact:releng/adhoc/*
+  to:
+    - project:
+        feature: adhoc-roles
+        job: [branch:*, action:*, pull-request:trusted, cron:*]
 
 - grant:
     - project:adhoc:releng:signing:cert:release-signing
